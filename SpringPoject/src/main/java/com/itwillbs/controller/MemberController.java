@@ -51,6 +51,14 @@ public class MemberController {
 		
 	}
 	
+	@RequestMapping(value="member/loginPro", method = RequestMethod.POST)
+	public String loginPro() {
+		System.out.println("MemberController loginPro()");
+		
+		return "redirect:/member/main";
+		
+	}
+	
 //	주소매핑 -> member/main.jsp
 	
 	@RequestMapping (value="/member/main", method= RequestMethod.GET)
