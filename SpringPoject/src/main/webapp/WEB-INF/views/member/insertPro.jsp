@@ -1,5 +1,5 @@
-<%-- <%@page import="member.MemberDTO"%> --%>
-<%-- <%@page import="member.MemberDAO"%> --%>
+<%@page import="member.MemberDTO"%>
+<%@page import="member.MemberDAO"%>
 <%@page import="java.sql.Timestamp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -28,22 +28,22 @@ Timestamp date=new Timestamp(System.currentTimeMillis());
 // => 패키지 member 파일이름 MemberDTO
 // => id, pass, name, date 멤버변수, set get메서드()
 // => MemberDTO 객체생성 => 기억장소 할당
-// MemberDTO dto=new MemberDTO();
-// System.out.println("MemberDTO 바구니 주소 : "+dto);
-// // => 기억장소에 id, pass, name, date 값을 저장
-// dto.setId(id);
-// dto.setPass(pass);
-// dto.setName(name);
-// dto.setDate(date);
+MemberDTO dto=new MemberDTO();
+System.out.println("MemberDTO 바구니 주소 : "+dto);
+// => 기억장소에 id, pass, name, date 값을 저장
+dto.setId(id);
+dto.setPass(pass);
+dto.setName(name);
+dto.setDate(date);
 
 // 1~4단계 자바파일(MemberDAO:member 디비접근객체) 에 
 // => Java Resources - src/main/java - 패키지 member 파일이름 MemberDAO
 // insertMember() 메서드 정의해서 
 // 자바파일 객체생성하고 메서드호출
-// MemberDAO dao=new MemberDAO();
-// System.out.println("MemberDAO 주소 : "+dao);
+MemberDAO dao=new MemberDAO();
+System.out.println("MemberDAO 주소 : "+dao);
 // dao.insertMember(id, pass, name, date);
-// dao.insertMember(dto);
+dao.insertMember(dto);
 
 
 // 로그인 이동

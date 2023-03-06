@@ -16,7 +16,7 @@
 <!-- 프로젝트명/member/insertPro -->
 <!-- http://localhost:8080/프로젝트명/member/member/insertPro -->
 <h1>member/insertForm.jsp</h1>
-<form action="${pageContext.request.contextPath }/member/loginPro" method="post">
+<form action="${pageContext.request.contextPath }/member/insertPro" method="post">
 아이디 : <input type="text" name="id"><br>
 비밀번호 : <input type="password" name="pass"><br>
 이름 : <input type="text" name="name"><br>
