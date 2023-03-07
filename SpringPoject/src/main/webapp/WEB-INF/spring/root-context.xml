@@ -5,4 +5,36 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
+	<!-- 스프링에서 객체생성하는 방식 -->
+
+<!-- 		MemberController 객체생성 -->
+	<bean id = "memberController" class="com.itwillbs.controller.MemberController" >
+	<!-- 	생성자호출	 -->
+<!-- 	<constructor-arg name="memberService" ref="memberService"></constructor-arg> -->
+<!-- 	set메서드호출 -->
+		<property name="memberService" ref="memberService"></property>
+	</bean>
+	
+<!-- 		MemberServiceImpl 객체생성 -->
+	<bean id = "memberService" class="com.itwillbs.service.MemberServiceImpl" >
+		<property name="memberDAO" ref="memberDAO"></property>
+	</bean>
+	
+<!-- 	MemberDAOImpl 객체생성 -->
+	<bean id = "memberDAO" class="com.itwillbs.dao.MemberDAOImpl" />
+
+<!-- 	디비연동을 하기위해서 JDBC 프로그램 필요 -->
+<!-- 	JDBC프로그램 수동 설치 WEB-INF lib JDBC 프로그램 설치 
+		JDBC프로그램 자동 설치 Maven 	
+		pom.xml 파일 설치할 프로그램 목록을 넣으면
+		Maven 저장소에서 자동으로 프로그램 다운 받아짐 
+		mvnrepository.com
+		
+		<dependency>
+		    <groupId>com.mysql</groupId>
+		    <artifactId>mysql-connector-j</artifactId>
+		    <version>8.0.32</version>
+		</dependency>
+		
+		-->
 </beans>

@@ -8,7 +8,12 @@ public class MemberDAOImpl implements MemberDAO{
 	public void insertMember(MemberDTO memberDTO) {
 		// 디비작업
 		System.out.println("MemberDAOImpl insertMember()");
-		
+	}
+
+	@Override
+	public MemberDTO userChcek(MemberDTO memberDTO) {
+		System.out.println("MemberDAOImpl userCheck()");
+		return null;
 	}
 
 }

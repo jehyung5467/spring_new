@@ -1,5 +1,6 @@
 package com.itwillbs.controller;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,23 +15,46 @@ import com.itwillbs.service.MemberServiceImpl;
 @Controller
 public class MemberController {
 	//주의: 파일이 틀려도 같은 @Controller에 있는 가상주소 모두 틀려야 됨
+
 	
-	// 가상주소 http://localhost:8080/myweb/member/insertForm
-	//		주소매핑 -> member/insertForm.jsp
+//	MemberService 부모 = new MemberServiceImpl 자식 객체생성;
+//	MemberService memberService = new MemberServiceImpl();
+	
+	// 스프링 3버전 자동으로 객체생성
+	// 멤버변수 부모 공통적인 틀 선언 => 데이터 은닉
+	// 스프링파일 root-context.xml 객체생성
+	// MemberController 파일에 멤버변수 memberService 전달
+	
+	// 멤버변수 데이터 은닉
+	private MemberService memberService;
+	
+	// 멤버변수 값을 전달 생성자, set메서드 통해서 전달
+	// 생성자
+//	public MemberController(MemberService memberService) {
+//		this.memberService=memberService;
+//	}
+	
+
+	//set메서드
+	@Inject
+	public void setMemberService(MemberService memberService) {
+		this.memberService = memberService;
+	}
+	
+	
+	// 스프링 4버전 자동으로 객체생성
+	// 멤버변수 부모 공통적인 틀 선언 => 데이터 은닉
+	// @Inject 부모를 상속받은 자식클래스를 자동으로 찾아옴
+//	@Inject
+//	private MemberService memberService;
+	
 	@RequestMapping(value = "/member/insert", method = RequestMethod.GET)
 		public String insertForm() {
 		//처리작업
-		// WEB-INF/views/member/insertForm.jsp
 		return "member/insertForm";
 	
-		// 가상주소에서 주소변경 하면서 이동(가상주소 /member/login)
-		// response.sendRedirect(forward.getPath());
-//		return "redirect:/member/login";
 	}
 	
-	// 가상주소 http://localhost:8080/myweb/member/insertPro
-	//	      http://localhost:8080/member/insertPro
-	// 전송방식 POST
 	@RequestMapping(value="member/insertPro", method = RequestMethod.POST)
 	public String insertPro(MemberDTO memberDTO) {
 //		System.out.println("MemberController insertPro()");
@@ -60,21 +84,18 @@ public class MemberController {
 		//	 MemberService 인터페이스 MemberServiceImpl 클래스 insertMember()
 		// -> 디비 패키지 com.itwillbs.dao
 		//	 MemberDAO 인터페이스 MemberDAOImpl 클래스 insertMember()
-		
-		// MemberService 부모 = MemberServiceImpl 자식 객체생성
-		MemberService memberService = new MemberServiceImpl();
 		// 매서드 호출
 		memberService.insertMember(memberDTO);
 		
 		return "redirect:/member/login";
-		
+
 	}
 	
 	@RequestMapping(value="/member/login", method = RequestMethod.GET)
 	public String login() {
-		
+	
 		return "member/loginForm";
-		
+	
 	}
 	
 	@RequestMapping(value="member/loginPro", method = RequestMethod.POST)
@@ -84,6 +105,11 @@ public class MemberController {
 		System.out.println(memberDTO.getId());
 		System.out.println(memberDTO.getPass());
 		System.out.println(memberDTO.getName());
+//		MemberService memberservice = new MemberServiceImpl();
+		// 리턴할형 MemberDTO userCheck(MemberDTO memberDTO)메서드정의
+		MemberDTO memberDTO2= memberService.userCheck(memberDTO);
+		// MemberDTO memberDTO2 = userCheck(MemberDTO) 메서드호출
+
 		return "redirect:/member/main";
 	}
 	
