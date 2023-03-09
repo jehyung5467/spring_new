@@ -7,12 +7,10 @@
 <title>member/logout.jsp</title>
 </head>
 <body>
-<h1>member/logout.jsp</h1>
 <%
-//세션전체 기억장소 삭제
+//세션값 전체 삭제
 session.invalidate();
-
-// "로그아웃", main.jsp 이동
+//로그아웃 메시지 출력  main.jsp 이동
 %>
 <script type="text/javascript">
 	alert("로그아웃");
@@ -20,3 +18,5 @@ session.invalidate();
 </script>
 </body>
 </html>
+
+

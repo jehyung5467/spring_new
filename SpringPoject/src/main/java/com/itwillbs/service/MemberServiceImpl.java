@@ -2,41 +2,62 @@ package com.itwillbs.service;
 
 import javax.inject.Inject;
 
+import org.springframework.stereotype.Service;
+
 import com.itwillbs.dao.MemberDAO;
 import com.itwillbs.dao.MemberDAOImpl;
 import com.itwillbs.domain.MemberDTO;
 
+//@Inject
+//private MemberService memberService;
+// => @Service ìë™ìœ¼ë¡œ ìì‹í´ë˜ìŠ¤ ì°¾ë„ë¡ í•¨
+
+@Service
 public class MemberServiceImpl implements MemberService{
-	// Ã³¸®ÀÛ¾÷
-	//ºÎ¸ğ ÀÎÅÍÆäÀÌ½º Æ² »ó¼Ó
-//	MemberDAO memberDAO = new MemberDAOImpl();
+	// ì²˜ë¦¬ì‘ì—… 
+	//ë¶€ëª¨ ì¸í„°í˜ì´ìŠ¤ í‹€ ìƒì†
 	
-	//¸â¹öº¯¼ö µ¥ÀÌÅÍ Àº´Ğ
+	//ë©¤ë²„ë³€ìˆ˜ ë¶€ëª¨=ìì‹ ê°ì²´ìƒì„±
+	// MemberDAO ë¶€ëª¨ = MemberDAOImpl ìì‹  ê°ì²´ìƒì„±
+//	MemberDAO memberDAO=new MemberDAOImpl();
+	
+	// ë©¤ë²„ë³€ìˆ˜ ë°ì´í„° ì€ë‹‰ => ê°ì²´ìƒì„±
+//	private MemberDAO memberDAO;
+	
+	//ë©¤ë²„ë³€ìˆ˜ ê°’ì„ ì „ë‹¬ ìƒì„±ì, setë©”ì„œë“œ í†µí•´ì„œ ì „ë‹¬
+	//setë©”ì„œë“œ
+//	@Inject
+//	public void setMemberDAO(MemberDAO memberDAO) {
+//		this.memberDAO = memberDAO;
+//	}
+	
+	// ë©¤ë²„ë³€ìˆ˜ ë°ì´í„° ì€ë‹‰ => ê°ì²´ìƒì„±
+	@Inject
 	private MemberDAO memberDAO;
 	
-	//¸â¹öº¯¼ö °ªÀ» Àü´Ş »ı¼ºÀÚ, set¸Ş¼­µå ÅëÇØ¼­ Àü´Ş
-	//set¸Ş¼­µå
-	@Inject
-	public void setMemberDAO(MemberDAO memberDAO) {
-		this.memberDAO = memberDAO;
-	}
 
 	@Override
 	public void insertMember(MemberDTO memberDTO) {
 		System.out.println("MemberServiceImpl insertMember()");
-		// MemberDAO ºÎ¸ğ = MemberDAOImpl ÀÚ½Ä °´Ã¼»ı¼º
-//		MemberDAO memberDAO = new MemberDAOImpl();
-		//¸Ş¼­µåÈ£Ãâ
+		// MemberDAO ë¶€ëª¨ = MemberDAOImpl ìì‹  ê°ì²´ìƒì„± 
+//		MemberDAO memberDAO=new MemberDAOImpl();
+		
+		// ë©”ì„œë“œ í˜¸ì¶œ
 		memberDAO.insertMember(memberDTO);
 	}
 
 	@Override
 	public MemberDTO userCheck(MemberDTO memberDTO) {
 		System.out.println("MemberServiceImpl userCheck()");
-//		MemberDAO memberDAO = new MemberDAOImpl();
-		memberDAO.userChcek(memberDTO);
+		// MemberDAO ë¶€ëª¨ = MemberDAOImpl ìì‹  ê°ì²´ìƒì„±
+//		MemberDAO memberDAO=new MemberDAOImpl();
 		
-		return null;
+		// ë¦¬í„´í• í˜• MemberDTO  userCheck(MemberDTO memberDTO ) ë©”ì„œë“œ ì •ì˜ 
+		// MemberDTO memberDTO2 = userCheck(memberDTO) ë©”ì„œë“œ í˜¸ì¶œ
+//		MemberDTO memberDTO2 =memberDAO.userCheck(memberDTO);
+		
+		return memberDAO.userCheck(memberDTO);
 	}
+	
 	
 }

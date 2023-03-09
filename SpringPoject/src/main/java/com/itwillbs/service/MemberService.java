@@ -3,8 +3,9 @@ package com.itwillbs.service;
 import com.itwillbs.domain.MemberDTO;
 
 public interface MemberService {
-	// Å¬·¡½º ¸¸µé±â À§ÇÑ ºÎ¸ğ ÀÎÅÍÆäÀÌ½º Æ²
-	// Ãß»ó¸Ş¼­µå Æ² Á¤ÀÇ
+	// í´ë˜ìŠ¤ ë§Œë“¤ê¸° ìœ„í•œ ë¶€ëª¨ ì¸í„°í˜ì´ìŠ¤ í‹€
+	// ì¶”ìƒë©”ì„œë“œ í‹€ ì •ì˜
 	public void insertMember(MemberDTO memberDTO);
+	
 	public MemberDTO userCheck(MemberDTO memberDTO);
 }

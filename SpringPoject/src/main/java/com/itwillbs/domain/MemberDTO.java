@@ -1,9 +1,13 @@
 package com.itwillbs.domain;
 
+import java.sql.Timestamp;
+
 public class MemberDTO {
 	private String id;
 	private String pass;
 	private String name;
+	private Timestamp date;
+	
 	public String getId() {
 		return id;
 	}
@@ -21,6 +25,12 @@ public class MemberDTO {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public Timestamp getDate() {
+		return date;
+	}
+	public void setDate(Timestamp date) {
+		this.date = date;
 	}
 	
 }
