@@ -1,5 +1,7 @@
 package com.itwillbs.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -10,28 +12,28 @@ import com.itwillbs.domain.MemberDTO;
 
 //@Inject
 //private MemberService memberService;
-// => @Service ìë™ìœ¼ë¡œ ìì‹í´ë˜ìŠ¤ ì°¾ë„ë¡ í•¨
+// => @Service ÀÚµ¿À¸·Î ÀÚ½ÄÅ¬·¡½º Ã£µµ·Ï ÇÔ
 
 @Service
 public class MemberServiceImpl implements MemberService{
-	// ì²˜ë¦¬ì‘ì—… 
-	//ë¶€ëª¨ ì¸í„°í˜ì´ìŠ¤ í‹€ ìƒì†
+	// Ã³¸®ÀÛ¾÷ 
+	//ºÎ¸ğ ÀÎÅÍÆäÀÌ½º Æ² »ó¼Ó
 	
-	//ë©¤ë²„ë³€ìˆ˜ ë¶€ëª¨=ìì‹ ê°ì²´ìƒì„±
-	// MemberDAO ë¶€ëª¨ = MemberDAOImpl ìì‹  ê°ì²´ìƒì„±
+	//¸â¹öº¯¼ö ºÎ¸ğ=ÀÚ½Ä °´Ã¼»ı¼º
+	// MemberDAO ºÎ¸ğ = MemberDAOImpl ÀÚ½Ä  °´Ã¼»ı¼º
 //	MemberDAO memberDAO=new MemberDAOImpl();
 	
-	// ë©¤ë²„ë³€ìˆ˜ ë°ì´í„° ì€ë‹‰ => ê°ì²´ìƒì„±
+	// ¸â¹öº¯¼ö µ¥ÀÌÅÍ Àº´Ğ => °´Ã¼»ı¼º
 //	private MemberDAO memberDAO;
 	
-	//ë©¤ë²„ë³€ìˆ˜ ê°’ì„ ì „ë‹¬ ìƒì„±ì, setë©”ì„œë“œ í†µí•´ì„œ ì „ë‹¬
-	//setë©”ì„œë“œ
+	//¸â¹öº¯¼ö °ªÀ» Àü´Ş »ı¼ºÀÚ, set¸Ş¼­µå ÅëÇØ¼­ Àü´Ş
+	//set¸Ş¼­µå
 //	@Inject
 //	public void setMemberDAO(MemberDAO memberDAO) {
 //		this.memberDAO = memberDAO;
 //	}
 	
-	// ë©¤ë²„ë³€ìˆ˜ ë°ì´í„° ì€ë‹‰ => ê°ì²´ìƒì„±
+	// ¸â¹öº¯¼ö µ¥ÀÌÅÍ Àº´Ğ => °´Ã¼»ı¼º
 	@Inject
 	private MemberDAO memberDAO;
 	
@@ -39,25 +41,54 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void insertMember(MemberDTO memberDTO) {
 		System.out.println("MemberServiceImpl insertMember()");
-		// MemberDAO ë¶€ëª¨ = MemberDAOImpl ìì‹  ê°ì²´ìƒì„± 
+		// MemberDAO ºÎ¸ğ = MemberDAOImpl ÀÚ½Ä  °´Ã¼»ı¼º 
 //		MemberDAO memberDAO=new MemberDAOImpl();
 		
-		// ë©”ì„œë“œ í˜¸ì¶œ
+		// ¸Ş¼­µå È£Ãâ
 		memberDAO.insertMember(memberDTO);
 	}
 
 	@Override
 	public MemberDTO userCheck(MemberDTO memberDTO) {
 		System.out.println("MemberServiceImpl userCheck()");
-		// MemberDAO ë¶€ëª¨ = MemberDAOImpl ìì‹  ê°ì²´ìƒì„±
+		// MemberDAO ºÎ¸ğ = MemberDAOImpl ÀÚ½Ä  °´Ã¼»ı¼º
 //		MemberDAO memberDAO=new MemberDAOImpl();
 		
-		// ë¦¬í„´í• í˜• MemberDTO  userCheck(MemberDTO memberDTO ) ë©”ì„œë“œ ì •ì˜ 
-		// MemberDTO memberDTO2 = userCheck(memberDTO) ë©”ì„œë“œ í˜¸ì¶œ
+		// ¸®ÅÏÇÒÇü MemberDTO  userCheck(MemberDTO memberDTO ) ¸Ş¼­µå Á¤ÀÇ 
+		// MemberDTO memberDTO2 = userCheck(memberDTO) ¸Ş¼­µå È£Ãâ
 //		MemberDTO memberDTO2 =memberDAO.userCheck(memberDTO);
 		
 		return memberDAO.userCheck(memberDTO);
 	}
+
+	@Override
+	public MemberDTO getMember(String id) {
+		System.out.println("MemberServiceImpl getMember()");
+		
+		return memberDAO.getMember(id);
+	}
+
+	@Override
+	public void updateMember(MemberDTO memberDTO) {
+		System.out.println("MemberServiceImpl updateMember()");
+	
+	}
+
+	@Override
+	public void deleteMember(MemberDTO memberDTO) {
+		System.out.println("MemberServiceImpl deleteMember()");
+		
+		memberDAO.deleteMember(memberDTO);
+	}
+
+	@Override
+	public List<MemberDTO> getMemberList() {
+		
+		return memberDAO.getMemberList();
+	}
+
+	
+
 	
 	
 }

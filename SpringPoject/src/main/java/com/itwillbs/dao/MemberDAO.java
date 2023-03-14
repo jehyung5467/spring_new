@@ -1,10 +1,15 @@
 package com.itwillbs.dao;
 
+import java.util.List;
+
 import com.itwillbs.domain.MemberDTO;
 
 public interface MemberDAO {
-	// ì¶”ìƒë©”ì„œë“œ í‹€ ì •ì˜
+	// Ãß»ó¸Ş¼­µå Æ² Á¤ÀÇ
 	public void insertMember(MemberDTO memberDTO);
-	
 	public MemberDTO userCheck(MemberDTO memberDTO);
+	public MemberDTO getMember(String id);
+	public void updateMember(MemberDTO memberDTO);
+	public void deleteMember(MemberDTO memberDTo);
+	public List<MemberDTO> getMemberList();
 }

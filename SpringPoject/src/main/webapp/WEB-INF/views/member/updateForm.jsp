@@ -7,22 +7,26 @@
 <title>member/updateForm.jsp</title>
 </head>
 <body>
+<h1>member/updateForm.jsp</h1>
 <%
-// //로그인하면 세션값이 생성 => 페이지 상관없이 값이 유지 => 세션값 가져오기
+// //회원정보 기준값 id => 세션에 "id"값 저장 되어있음
+// //세션에서 "id" 값을 가져오기 => 변수저장
 // String id=(String)session.getAttribute("id");
 // //MemberDAO 객체생성
-// MemberDAO memberDAO=new MemberDAO();
-// // MemberDTO memberDTO = getMember(id) 메서드 호출
-// MemberDTO memberDTO=memberDAO.getMember(id);
+// MemberDAO dao=new MemberDAO();
+// //MemberDTO dto = getMember(id) 메서드호출
+// MemberDTO dto=dao.getMember(id);
 
-// MemberDTO memberDTO=(MemberDTO)request.getAttribute("memberDTO");
-	%>
+// MemberDTO dto =(MemberDTO)request.getAttribute("dto");
+%>
 <form action="${pageContext.request.contextPath }/member/updatePro" method="post">
-아이디 : <input type="text" name="id" value="<%//=memberDTO.getId() %>" readonly><br>
+아이디 : <input type="text" name="id" value="${memberDTO.id }" readonly><br>
 비밀번호 : <input type="password" name="pass"><br>
-이름 : <input type="text" name="name" value="<%//=memberDTO.getName() %>"><br>
+이름 : <input type="text" name="name" value="${memberDTO.name }"><br>
 <input type="submit" value="회원정보수정">
-</form>	
+</form>
+
 <a href="${pageContext.request.contextPath }/member/main">메인으로 이동</a>
 </body>
 </html>
+

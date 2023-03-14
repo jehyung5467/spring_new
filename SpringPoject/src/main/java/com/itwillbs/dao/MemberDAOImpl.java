@@ -1,6 +1,7 @@
 package com.itwillbs.dao;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
@@ -12,24 +13,24 @@ import com.itwillbs.domain.MemberDTO;
 
 //@Inject
 //private MemberDAO memberDAO;
-// => ìë™ìœ¼ë¡œ @Repository ì •ì˜ëœ ìì‹í´ë˜ìŠ¤ ì°¾ì•„ì„œ ê°ì²´ìƒì„± 
+// => ÀÚµ¿À¸·Î @Repository Á¤ÀÇµÈ ÀÚ½ÄÅ¬·¡½º Ã£¾Æ¼­ °´Ã¼»ı¼º 
 
 @Repository
 public class MemberDAOImpl implements MemberDAO{
 	
-	//ë§ˆì´ë°”í‹°ìŠ¤ ë””ë¹„ì—°ê²° ê°ì²´ìƒì„±
-	//ì€ë‹‰ ë©¤ë²„ë³€ìˆ˜
-	//  @Inject => root-context.xml íŒŒì¼ì— ê°ì²´ìƒì„±ëœ "sqlSession" ì°¾ì•„ì„œ ìë™ìœ¼ë¡œ ê°€ì ¸ì˜´
+	//¸¶ÀÌ¹ÙÆ¼½º µğºñ¿¬°á °´Ã¼»ı¼º
+	//Àº´Ğ ¸â¹öº¯¼ö
+	//  @Inject => root-context.xml ÆÄÀÏ¿¡ °´Ã¼»ı¼ºµÈ "sqlSession" Ã£¾Æ¼­ ÀÚµ¿À¸·Î °¡Á®¿È
 	@Inject
 	private SqlSession sqlSession;
 
-	//ë””ë¹„ì—°ê²° ê°ì²´ìƒì„±
-	//ì€ë‹‰ ë©¤ë²„ë³€ìˆ˜
+	//µğºñ¿¬°á °´Ã¼»ı¼º
+	//Àº´Ğ ¸â¹öº¯¼ö
 //	private DataSource dataSource;
 //	private SimpleJdbcTemplate template;
 	
 //	import javax.sql.DataSource;
-	//setë©”ì„œë“œ
+	//set¸Ş¼­µå
 //	@Inject
 //	public void setDataSource(DataSource dataSource) {
 //		this.dataSource = dataSource;
@@ -40,16 +41,16 @@ public class MemberDAOImpl implements MemberDAO{
 //	String sql="insert into members(id,pass,name,date) values(?,?,?,?)";
 	@Override
 	public void insertMember(MemberDTO memberDTO) {
-		// ë””ë¹„ì‘ì—… 
+		// µğºñÀÛ¾÷ 
 		System.out.println("MemberDAOImpl insertMember()");
 		
 //		import java.sql.Timestamp;
 		memberDTO.setDate(new Timestamp(System.currentTimeMillis()));
 		
-		//  src/main/resources í´ë” mappers íŒŒì¼ memberMapper.xml 
-		//  namespace="com.itwillbs.mappers.memberMapper" ì´ë¦„ì„ ë¶ˆëŸ¬ì„œ ì‚¬ìš©
-		//  MyBatis sqlêµ¬ë¬¸ í˜¸ì¶œí•´ì„œ ì‚¬ìš©
-//		sqlSession.insert(sqlêµ¬ë¬¸ì´ë¦„, ?í‘œì— ì…ë ¥ë ê°’memberDTO);
+		//  src/main/resources Æú´õ mappers ÆÄÀÏ memberMapper.xml 
+		//  namespace="com.itwillbs.mappers.memberMapper" ÀÌ¸§À» ºÒ·¯¼­ »ç¿ë
+		//  MyBatis sql±¸¹® È£ÃâÇØ¼­ »ç¿ë
+//		sqlSession.insert(sql±¸¹®ÀÌ¸§, ?Ç¥¿¡ ÀÔ·ÂµÉ°ªmemberDTO);
 		sqlSession.insert(namespace+".insertMember", memberDTO);
 		
 //		template.update(sql, memberDTO.getId(), memberDTO.getPass(),
@@ -61,8 +62,48 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public MemberDTO userCheck(MemberDTO memberDTO) {
 		System.out.println("MemberDAOImpl userCheck()");
-		// selectOne ë¦¬í„´ê°’ì´ MemberDTO í•˜ë‚˜ì¼ë•Œ ì‚¬ìš© 
+		// selectOne ¸®ÅÏ°ªÀÌ MemberDTO ÇÏ³ªÀÏ¶§ »ç¿ë 
 		return sqlSession.selectOne(namespace+".userCheck", memberDTO);
 	}
+
+
+
+	@Override
+	public MemberDTO getMember(String id) {
+		System.out.println("MemberDAOImpl getMember()");
+		
+		return sqlSession.selectOne(namespace+".getMember", id);
+	}
+
+
+
+	@Override
+	public void updateMember(MemberDTO memberDTO) {
+		System.out.println("MemberDAOImpl updateMember()");
+		
+		 sqlSession.selectOne(namespace+".updateMember", memberDTO);
+	}
+
+
+
+	@Override
+	public void deleteMember(MemberDTO memberDTO) {
+		System.out.println("MemberDAOImpl updateMember()");
+		
+		 sqlSession.selectOne(namespace+".deleteMember", memberDTO);
+	}
+
+
+
+	@Override
+	public List<MemberDTO> getMemberList() {
+		System.out.println("MemberDAOImpl getMemberList()");
+		//selectList
+		return sqlSession.selectList(namespace+".getMemberList");
+	}
+
+
+
+	
 
 }

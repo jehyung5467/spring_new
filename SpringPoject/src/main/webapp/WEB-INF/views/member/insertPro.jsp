@@ -1,8 +1,6 @@
 <%@page import="member.MemberDTO"%>
 <%@page import="member.MemberDAO"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Timestamp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,43 +10,48 @@
 <title>member/insertPro.jsp</title>
 </head>
 <body>
+<h1>member/insertPro.jsp</h1>
 <%
-// post request 한글처리
+//폼에서 입력한 내용이 서버에 전달 => request 내장객체 저장
+//request 한글처리
 request.setCharacterEncoding("utf-8");
-// request id pass name 파라미터 값 가져오기 => 변수 저장
+// request 태그이름에 해당하는 값을 가져오기 => 변수에 저장
 String id=request.getParameter("id");
 String pass=request.getParameter("pass");
 String name=request.getParameter("name");
+//가입날짜 => 시스템 날짜 
+// java.sql.Timestamp 자바내장객체 => 날짜 
+Timestamp date=new Timestamp(System.currentTimeMillis());
 
-//자바파일 : 데이터를 담아서 전달
-// 패키지 member 파일이름 MemberDTO
-// 멤버변수 정의, 멤버변수 접근 메서드 정의
-// 객체생성 => 기억장소 할당
-MemberDTO memberDTO=new MemberDTO();
-// 멤버변수에 값을 저장하는 메서드 호출
-memberDTO.setId(id);
-memberDTO.setPass(pass);
-memberDTO.setName(name);
+// id, pass, name, date,age,gender,email,phone,mobile,address,postcode,...
+// => 하나의 자바파일에 담아서 전달(MemberDTO :member 데이터 전송 객체)
+// => 패키지 member 파일이름 MemberDTO
+// => id, pass, name, date 멤버변수, set get메서드()
+// => MemberDTO 객체생성 => 기억장소 할당
+MemberDTO dto=new MemberDTO();
+System.out.println("MemberDTO 바구니 주소 : "+dto);
+// => 기억장소에 id, pass, name, date 값을 저장
+dto.setId(id);
+dto.setPass(pass);
+dto.setName(name);
+dto.setDate(date);
 
-//자바파일 메서드정의(디비) 메서드 호출
-// 패키지 member 파일이름 MemberDAO
-// insertMember() 메서드 정의 
+// 1~4단계 자바파일(MemberDAO:member 디비접근객체) 에 
+// => Java Resources - src/main/java - 패키지 member 파일이름 MemberDAO
+// insertMember() 메서드 정의해서 
+// 자바파일 객체생성하고 메서드호출
+MemberDAO dao=new MemberDAO();
+System.out.println("MemberDAO 주소 : "+dao);
+// dao.insertMember(id, pass, name, date);
+dao.insertMember(dto);
 
-//객체생성 => 클래스 기억장소 할당
-MemberDAO memberDAO=new MemberDAO();
-// 메서드 호출
 
-// memberDAO.insertMember(id,pass,name);
-memberDAO.insertMember(memberDTO);
-
+// 로그인 이동
+response.sendRedirect("loginForm.jsp");
 %>
-<script type="text/javascript">
-	alert("회원가입 성공");
-	location.href="loginForm.jsp";
-</script>
-<body>
-</html>
 
+</body>
+</html>
 
 
 
